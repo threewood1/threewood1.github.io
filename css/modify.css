@@ -23,25 +23,6 @@
     top: 100px !important;
   }
 }
-/* 文章页背景 */
-.layout_post>#post {
-/* 以下代表透明度为0.5 可以自行修改*/
-  background: rgba(255,255,255,0.8);
-}
-/* 所有页面背景 */
-#aside_content .card-widget,
-#recent-posts>.recent-post-item,
-.layout_page>div:first-child:not(.recent-posts),
-.layout_post>#page,
-.layout_post>#post,
-.read-mode .layout_post>#post {
-/* 以下代表透明度为0.5 */
-  background: rgba(255,255,255,0.8);
-}
-/*侧边卡片的透明度 */
-:root {
-  --card-bg: rgba(255,255,255,0.8);
-}
 .top-img {
   height: 250px;
   margin: -50px -40px 50px;
@@ -65,10 +46,10 @@
   filter: brightness(0.8);
 }
 #footer:before {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255,255,255,0.5);
 }
 [data-theme='dark'] #footer:before {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.5);
 }
 #footer-wrap,
 #footer-wrap a {
@@ -82,4 +63,11 @@
 [data-theme='dark'] #footer-wrap,
 [data-theme='dark'] #footer-wrap a {
   color: var(--light-grey);
+}
+/*背景透明度 */
+:root {
+  --card-bg: rgba(255,255,255,0.8) !important;
+}
+[data-theme='dark']:root {
+  --card-bg: rgba(18,18,18,0.8) !important;
 }
