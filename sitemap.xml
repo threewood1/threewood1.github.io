@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://threewood1.top/post/ad031ca3.html</loc>
-    
-    <lastmod>2023-09-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://threewood1.top/gallery/index/lin/index.html</loc>
     
     <lastmod>2023-09-03</lastmod>
@@ -21,6 +12,15 @@
   
   <url>
     <loc>https://threewood1.top/gallery/index.html</loc>
+    
+    <lastmod>2023-09-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://threewood1.top/post/ad031ca3.html</loc>
     
     <lastmod>2023-09-03</lastmod>
     
@@ -206,7 +206,7 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/Java/</loc>
+    <loc>https://threewood1.top/tags/MySQL/</loc>
     <lastmod>2023-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -220,7 +220,7 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/MySQL/</loc>
+    <loc>https://threewood1.top/tags/Java/</loc>
     <lastmod>2023-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
