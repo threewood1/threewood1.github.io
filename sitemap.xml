@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://threewood1.top/gallery/index/lin/index.html</loc>
+    <loc>https://threewood1.top/gallery/index.html</loc>
     
     <lastmod>2023-09-03</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/gallery/index.html</loc>
+    <loc>https://threewood1.top/gallery/index/lin/index.html</loc>
     
     <lastmod>2023-09-03</lastmod>
     
@@ -206,14 +206,14 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/MySQL/</loc>
+    <loc>https://threewood1.top/tags/JDBC/</loc>
     <lastmod>2023-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/JDBC/</loc>
+    <loc>https://threewood1.top/tags/MySQL/</loc>
     <lastmod>2023-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
