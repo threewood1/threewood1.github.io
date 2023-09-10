@@ -4,7 +4,7 @@
   <url>
     <loc>https://threewood1.top/post/afa3c662.html</loc>
     
-    <lastmod>2023-09-08</lastmod>
+    <lastmod>2023-09-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -208,7 +208,7 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/maven/</loc>
+    <loc>https://threewood1.top/tags/Maven/</loc>
     <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -223,6 +223,20 @@
   
   <url>
     <loc>https://threewood1.top/tags/Mybatis/</loc>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://threewood1.top/tags/Hexo/</loc>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://threewood1.top/tags/ButterFly/</loc>
     <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -244,20 +258,6 @@
   
   <url>
     <loc>https://threewood1.top/tags/anime/</loc>
-    <lastmod>2023-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://threewood1.top/tags/Hexo/</loc>
-    <lastmod>2023-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://threewood1.top/tags/ButterFly/</loc>
     <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -294,6 +294,13 @@
   </url>
   
   <url>
+    <loc>https://threewood1.top/categories/Hexo/</loc>
+    <lastmod>2023-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://threewood1.top/categories/Installing/</loc>
     <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -302,13 +309,6 @@
   
   <url>
     <loc>https://threewood1.top/categories/Anime/</loc>
-    <lastmod>2023-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://threewood1.top/categories/Hexo/</loc>
     <lastmod>2023-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
