@@ -189,27 +189,6 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/Maven/</loc>
-    <lastmod>2023-09-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://threewood1.top/tags/SpringBoot/</loc>
-    <lastmod>2023-09-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://threewood1.top/tags/Mybatis/</loc>
-    <lastmod>2023-09-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://threewood1.top/tags/HTML/</loc>
     <lastmod>2023-09-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -252,6 +231,27 @@
   </url>
   
   <url>
+    <loc>https://threewood1.top/tags/Maven/</loc>
+    <lastmod>2023-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://threewood1.top/tags/SpringBoot/</loc>
+    <lastmod>2023-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://threewood1.top/tags/Mybatis/</loc>
+    <lastmod>2023-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://threewood1.top/tags/VSCode/</loc>
     <lastmod>2023-09-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -280,14 +280,14 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/Java/</loc>
+    <loc>https://threewood1.top/tags/MySQL/</loc>
     <lastmod>2023-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/MySQL/</loc>
+    <loc>https://threewood1.top/tags/Java/</loc>
     <lastmod>2023-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
