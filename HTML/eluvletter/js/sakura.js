@@ -12,7 +12,7 @@ var RENDERER = {
 		this.$container = $('#jsi-cherry-container');
 		this.width = this.$container.width();
 		this.height = this.$container.height();
-		this.context = $('<canvas>').attr({width : this.width, height : this.height, position : 'absolute', top : 0}).appendTo(this.$container).get(0).getContext('2d');
+		this.context = $('<canvas />').attr({width : this.width, height : this.height, position : 'absolute', top : 0}).appendTo(this.$container).get(0).getContext('2d');
 		this.cherries = [];
 		this.maxAddingInterval = Math.round(this.MAX_ADDING_INTERVAL * 1000 / this.width);
 		this.addingInterval = this.maxAddingInterval;
@@ -77,7 +77,7 @@ CHERRY_BLOSSOM.prototype = {
 			theta = this.theta + Math.ceil(-(this.y + this.renderer.height * this.SURFACE_RATE) / this.vy) * Math.PI / 500;
 		theta %= Math.PI * 2;
 		
-		this.offsetY = 40 * ((theta <= 2 math.pi || theta>= Math.PI * 3 / 2) ? -1 : 1);
+		this.offsetY = 40 * ((theta <= Math.PI / 2 || theta >= Math.PI * 3 / 2) ? -1 : 1);
 		this.thresholdY = this.renderer.height / 2 + this.renderer.height * this.SURFACE_RATE * axis.rate;
 		this.entityColor = this.renderer.context.createRadialGradient(0, 40, 0, 0, 40, 80);
 		this.entityColor.addColorStop(0, 'hsl(330, 70%, ' + 50 * (0.3 + axis.rate) + '%)');
@@ -118,7 +118,43 @@ CHERRY_BLOSSOM.prototype = {
 			context.save();
 			context.lineWidth = 2;
 			context.strokeStyle = 'hsla(0, 0%, 100%, ' + (this.MAX_RIPPLE_COUNT - this.rippleCount) / this.MAX_RIPPLE_COUNT + ')';
-			context.translate(axis.x + this.offsetY * axis.rate * (this.theta <= 3 40 70 200 math.pi ? -1 : 1), axis.y); context.scale(1, 0.3); context.beginpath(); context.arc(0, 0, this.ripplecount this.max_ripple_count * this.ripple_radius axis.rate, 2, false); context.stroke(); context.restore(); this.ripplecount++; } if(axis.y < this.thresholdy || (!this.endtheta !this.endphi)){ if(this.y this.opacity="Math.min(this.opacity" + 0.01, 1); context.save(); context.globalalpha="this.opacity;" context.fillstyle="this.shadowColor;" context.strokestyle="hsl(330, 30%," (0.3 axis.rate) '%)'; context.translate(axis.x, math.max(axis.y, - axis.y)); context.rotate(math.pi this.theta); context.scale(axis.rate -math.sin(this.phi), axis.rate); context.translate(0, this.offsety); this.rendercherry(context, axis); axis.y math.abs(this.sink_offset math.sin(this.psi) axis.rate)); context.rotate(this.theta); math.sin(this.phi), 4){ if(!this.endtheta){ for(var theta="Math.PI" end="Math.PI" 2; if(this.theta && this.theta> theta){
+			context.translate(axis.x + this.offsetY * axis.rate * (this.theta <= Math.PI ? -1 : 1), axis.y);
+			context.scale(1, 0.3);
+			context.beginPath();
+			context.arc(0, 0, this.rippleCount / this.MAX_RIPPLE_COUNT * this.RIPPLE_RADIUS * axis.rate, 0, Math.PI * 2, false);
+			context.stroke();
+			context.restore();
+			this.rippleCount++;
+		}
+		if(axis.y < this.thresholdY || (!this.endTheta || !this.endPhi)){
+			if(this.y <= 0){
+				this.opacity = Math.min(this.opacity + 0.01, 1);
+			}
+			context.save();
+			context.globalAlpha = this.opacity;
+			context.fillStyle = this.shadowColor;
+			context.strokeStyle = 'hsl(330, 30%,' + 40 * (0.3 + axis.rate) + '%)';
+			context.translate(axis.x, Math.max(axis.y, this.thresholdY + this.thresholdY - axis.y));
+			context.rotate(Math.PI - this.theta);
+			context.scale(axis.rate * -Math.sin(this.phi), axis.rate);
+			context.translate(0, this.offsetY);
+			this.renderCherry(context, axis);
+			context.restore();
+		}
+		context.save();
+		context.fillStyle = this.entityColor;
+		context.strokeStyle = 'hsl(330, 40%,' + 70 * (0.3 + axis.rate) + '%)';
+		context.translate(axis.x, axis.y + Math.abs(this.SINK_OFFSET * Math.sin(this.psi) * axis.rate));
+		context.rotate(this.theta);
+		context.scale(axis.rate * Math.sin(this.phi), axis.rate);
+		context.translate(0, this.offsetY);
+		this.renderCherry(context, axis);
+		context.restore();
+		
+		if(this.y <= -this.renderer.height / 4){
+			if(!this.endTheta){
+				for(var theta = Math.PI / 2, end = Math.PI * 3 / 2; theta <= end; theta += Math.PI){
+					if(this.theta < theta && this.theta + Math.PI / 200 > theta){
 						this.theta = theta;
 						this.endTheta = true;
 						break;
@@ -126,7 +162,8 @@ CHERRY_BLOSSOM.prototype = {
 				}
 			}
 			if(!this.endPhi){
-				for(var phi = Math.PI / 8, end = Math.PI * 7 / 8; phi <= 3 200 end; phi +="Math.PI" * 4){ if(this.phi < && this.phi math.pi> phi){
+				for(var phi = Math.PI / 8, end = Math.PI * 7 / 8; phi <= end; phi += Math.PI * 3 / 4){
+					if(this.phi < phi && this.phi + Math.PI / 200 > phi){
 						this.phi = Math.PI / 8;
 						this.endPhi = true;
 						break;
@@ -151,8 +188,15 @@ CHERRY_BLOSSOM.prototype = {
 			this.phi += Math.PI / ((axis.y == this.thresholdY) ? 200 : 500);
 			this.phi %= Math.PI;
 		}
-		if(this.y <= -this.renderer.height * this.surface_rate){ this.x +="2;" this.y="-this.renderer.height" this.surface_rate; }else{ } return this.z> -this.FOCUS_POSITION && this.z < this.FAR_LIMIT && this.x < this.renderer.width * 1.5;
+		if(this.y <= -this.renderer.height * this.SURFACE_RATE){
+			this.x += 2;
+			this.y = -this.renderer.height * this.SURFACE_RATE;
+		}else{
+			this.x += this.vx;
+			this.y += this.vy;
+		}
+		return this.z > -this.FOCUS_POSITION && this.z < this.FAR_LIMIT && this.x < this.renderer.width * 1.5;
 	}
 };
 
-$(function(){ RENDERER.init(); });</=></=></=></=></canvas>
+$(function(){ RENDERER.init(); });
