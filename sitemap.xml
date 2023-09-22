@@ -212,21 +212,7 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/Maven/</loc>
-    <lastmod>2023-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://threewood1.top/tags/SpringBoot/</loc>
-    <lastmod>2023-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://threewood1.top/tags/Mybatis/</loc>
     <lastmod>2023-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -240,7 +226,14 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/VSCode/</loc>
+    <loc>https://threewood1.top/tags/Maven/</loc>
+    <lastmod>2023-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://threewood1.top/tags/Mybatis/</loc>
     <lastmod>2023-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -275,6 +268,13 @@
   </url>
   
   <url>
+    <loc>https://threewood1.top/tags/VSCode/</loc>
+    <lastmod>2023-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://threewood1.top/tags/hello-world/</loc>
     <lastmod>2023-09-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -296,14 +296,14 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/Java/</loc>
+    <loc>https://threewood1.top/tags/MySQL/</loc>
     <lastmod>2023-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://threewood1.top/tags/MySQL/</loc>
+    <loc>https://threewood1.top/tags/Java/</loc>
     <lastmod>2023-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -319,7 +319,7 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/categories/Learning/</loc>
+    <loc>https://threewood1.top/categories/JavaWeb/</loc>
     <lastmod>2023-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -333,14 +333,14 @@
   </url>
   
   <url>
-    <loc>https://threewood1.top/categories/Installing/</loc>
+    <loc>https://threewood1.top/categories/Learning/</loc>
     <lastmod>2023-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://threewood1.top/categories/JavaWeb/</loc>
+    <loc>https://threewood1.top/categories/Installing/</loc>
     <lastmod>2023-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
