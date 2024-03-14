@@ -6,7 +6,7 @@
   <link href="https://threewood1.top/atom.xml" rel="self"/>
   
   <link href="https://threewood1.top/"/>
-  <updated>2024-03-12T11:12:32.151Z</updated>
+  <updated>2024-03-14T12:32:16.072Z</updated>
   <id>https://threewood1.top/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java学习 | JVM的垃圾回收机制——垃圾回收算法</title>
+    <link href="https://threewood1.top/post/dec4d43c.html"/>
+    <id>https://threewood1.top/post/dec4d43c.html</id>
+    <published>2024-03-14T12:16:24.000Z</published>
+    <updated>2024-03-14T12:32:16.072Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一、Java垃圾回收机制"><a href="#一、Java垃圾回收机制" class="headerlink" title="一、Java垃圾回收机制"></a><strong>一、Java垃圾回收机制</strong></h2><p>在java中，程序员是不需要显示的去释放一个对象的内存的，而是由虚拟机自行执行。在JVM中，有一个垃圾回收线程，它是低优先级的，在正常情况下是不会执行的，只有在虚拟机空闲或者当前堆内存不足时，才会触发执行，扫描那些没有被任何引用的对象，并将它们添加到要回收的集合中，进行回收。</p><h2 id="二、GC是什么？为什么要GC"><a href="#二、GC是什么？为什么要GC" class="headerlink" title="二、GC是什么？为什么要GC"></a><strong>二、GC是什么？为什么要GC</strong></h2><p>GC 垃圾收集（Gabage Collection），内存处理是编程人员容易出现问题的地方，忘记或者错误的内存。</p><p>不当的回收可能会导致程序或系统的不稳定甚至崩溃，Java 提供的 GC 功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java 语言没有提供释放已分配内存的显示操作方法。</p><p>对于GC来说，当程序员创建对象时，GC就开始监控这个对象的地址、大小以及使用情况。</p><p>通常，GC采用有向图的方式记录和管理堆(heap)中的所有对象。通过这种方式确定哪些对象是”可达的”，哪些对象是”不可达的”。当GC确定一些对象为”不可达”时，GC就有责任回收这些内存空间。</p><p>程序员可以手动执行System.gc()，通知GC运行，但是Java语言规范并不保证GC一定会执行。</p><p><img src="/post/dec4d43c/v2-2648bf4a93fbab62c0f71b86de7551fd_720w.webp" alt="img"></p><h2 id="三、Java-中的引用类型"><a href="#三、Java-中的引用类型" class="headerlink" title="三、Java 中的引用类型"></a><strong>三、Java 中的引用类型</strong></h2><ol><li>强引用：发生 gc 的时候不会被回收。</li><li>软引用：有用但不是必须的对象，在发生内存溢出之前会被回收。</li><li>弱引用：有用但不是必须的对象，在下一次GC时会被回收。</li><li>虚引用（幽灵引用&#x2F;幻影引用）：无法通过虚引用获得对象，用 PhantomReference 实现虚引用，虚引用的用途是在 gc 时返回一个通知。</li></ol><h2 id="四、如何判断对象是否可以被回收？什么时候被回收？"><a href="#四、如何判断对象是否可以被回收？什么时候被回收？" class="headerlink" title="四、如何判断对象是否可以被回收？什么时候被回收？"></a><strong>四、如何判断对象是否可以被回收？什么时候被回收？</strong></h2><p>垃圾收集器在做垃圾回收的时候，首先需要判定的就是哪些内存是需要被回收的，哪些对象是存活的，是不可以被回收的；哪些对象已经死亡了，需要被回收。</p><p><strong>一般有两种方法来判断：</strong></p><p><strong>引用计数器法</strong>：为每个对象创建一个引用计数，有对象引用时计数器 +1，引用被释放时计数 -1，当计数器为 0 时就可以被回收。但是他有一个缺点是不能解决循环引用的问题。</p><p><strong>可达性分析算法</strong>：从 GC Roots 开始向下搜索，搜索所走过的路径称为引用链。当一个对象到 GC Roots 没有任何引用链相连时，则证明此对象是可以被回收的。</p><p>当对象对当前使用这个对象的应用程序变得不可触及的时候，这个对象就可以被回收了。</p><p>垃圾回收不会发生在永久代，如果永久代满了或者是超过了临界值，会触发完全垃圾回收(Full GC)。查看垃圾收集器的输出信息，就会发现永久代也是被回收的。这就是为什么正确的永久代大小对避免Full GC是非常重要的原因。</p><h2 id="五、JVM-的垃圾回收算法？"><a href="#五、JVM-的垃圾回收算法？" class="headerlink" title="五、JVM 的垃圾回收算法？"></a><strong>五、JVM 的垃圾回收算法？</strong></h2><p><strong>1.标记-清除算法</strong>：标记无用对象，然后进行清除回收。缺点：效率不高，无法清除垃圾碎片。</p><ul><li>该算法分为两个阶段，<strong>标记和清除</strong>。标记阶段标记所有需要回收的对象，清除阶段回收被标记的对象所占用的空间。该算法最大的问题就是内存碎片严重化，后续可能发生对象不能找到利用空间的问题。</li></ul><p><img src="/post/dec4d43c/v2-7389d400dc04abb145a67fa86a662e33_720w.webp" alt="img"></p><p>标记清除算法</p><p><strong>2.复制算法</strong>：按照容量划分二个大小相等的内存区域，当一块用完的时候将活着的对象复制到另一块上，然后再把已使用的内存空间一次清理掉。缺点：内存使用率不高，只有原来的一半。</p><ul><li>按内存容量将内存划分为等大小的两块。每次只使用其中一块，当这一块内存满后将尚存活的对象复制到另一块上去，把已使用的内存清掉。</li></ul><p><img src="/post/dec4d43c/v2-20adb8ac4c5deb44fc27e30c8381281d_720w.webp" alt="img"></p><p>复制算法</p><p><strong>3.标记-整理算法</strong>：标记无用对象，让所有存活的对象都向一端移动，然后直接清除掉端边界以外的内存。</p><ul><li>标记后不是清理对象，而是将存活对象移向内存的一端。然后清除端边界外的对象。</li></ul><p><img src="/post/dec4d43c/v2-cc722c4e5b289434d2181451f4fd154c_720w.webp" alt="img"></p><p>标记整理算法</p><p><strong>4.分代算法</strong>：根据对象存活周期的不同将内存划分为几块，一般是新生代和老年代，新生代基本采用复制算法，老年代采用标记整理算法。</p><ul><li>当前商业虚拟机都采用分代收集的垃圾收集算法。分代收集算法，顾名思义是根据对象的存活周期将内存划分为几块。一般包括年轻代、老年代 和 永久代。</li></ul><p><img src="/post/dec4d43c/v2-40cbacd540b1555badbbf89132aace5f_720w.webp" alt="img"></p><p>分代收集</p><h2 id="六、垃圾收集器"><a href="#六、垃圾收集器" class="headerlink" title="六、垃圾收集器"></a><strong>六、垃圾收集器</strong></h2><p>Java 堆内存被划分为新生代和年老代两部分，新生代主要使用复制和标记-清除垃圾回收算法；</p><p>年老代主要使用标记-整理垃圾回收算法，因此 java 虚拟中针对新生代和年老代分别提供了多种不同的垃圾收集器，JDK1.6 中 Sun HotSpot 虚拟机的垃圾收集器如下：</p><p><img src="/post/dec4d43c/v2-f5426caf176fac7d2d7edcf43e127eaa_720w.webp" alt="img"></p><p>垃圾收集器</p><p>其中用于回收新生代的收集器包括Serial、PraNew、Parallel Scavenge，</p><p>回收老年代的收集器包括Serial Old、Parallel Old、CMS，</p><p>有用于回收整个Java堆的G1收集器。</p><p>新生代垃圾回收器一般采用的是复制算法，复制算法的优点是效率高，缺点是内存利用率低；老年代回收器一般采用的是标记-整理的算法进行垃圾回收。</p><ul><li>Serial收集器（复制算法): 新生代单线程收集器，标记和清理都是单线程，优点是简单高效；</li><li>ParNew收集器 (复制算法): 新生代收并行集器，实际上是Serial收集器的多线程版本，在多核CPU环境下有着比Serial更好的表现；</li><li>Parallel Scavenge收集器 (复制算法): 新生代并行收集器，追求高吞吐量，高效利用 CPU。吞吐量 &#x3D; 用户线程时间&#x2F;(用户线程时间+GC线程时间)，高吞吐量可以高效率的利用CPU时间，尽快完成程序的运算任务，适合后台应用等对交互相应要求不高的场景；</li><li>Serial Old收集器 (标记-整理算法): 老年代单线程收集器，Serial收集器的老年代版本；</li><li>Parallel Old收集器 (标记-整理算法)： 老年代并行收集器，吞吐量优先，Parallel Scavenge收集器的老年代版本；</li><li>CMS(Concurrent Mark Sweep)收集器（标记-清除算法）： 老年代并行收集器，以获取最短回收停顿时间为目标的收集器，具有高并发、低停顿的特点，追求最短GC回收停顿时间。</li><li>G1(Garbage First)收集器 (标记-整理算法)： Java堆并行收集器，G1收集器是JDK1.7提供的一个新收集器，G1收集器基于“标记-整理”算法实现，也就是说不会产生内存碎片。此外，G1收集器不同于之前的收集器的一个重要特点是：G1回收的范围是整个Java堆(包括新生代，老年代)，而前六种收集器回收的范围仅限于新生代或老年代。</li></ul><p>CMS 是英文 Concurrent Mark-Sweep 的简称，是以牺牲吞吐量为代价来获得最短回收停顿时间的垃圾回收器。对于要求服务器响应速度的应用上，这种垃圾回收器非常适合。在启动 JVM 的参数加上 “-XX:+UseConcMarkSweepGC” 来指定使用 CMS 垃圾回收器。</p><p>CMS 使用的是标记-清除的算法实现的，所以在 gc 的时候回产生大量的内存碎片，当剩余内存不能满足程序运行要求时，系统将会出现 Concurrent Mode Failure，临时 CMS 会采用 Serial Old 回收器进行垃圾清除，此时的性能将会被降低。</p><h2 id="七、分代垃圾回收器的工作机制？"><a href="#七、分代垃圾回收器的工作机制？" class="headerlink" title="七、分代垃圾回收器的工作机制？"></a><strong>七、分代垃圾回收器的工作机制？</strong></h2><p><strong>举个栗子：</strong></p><blockquote><p><strong>Java对象的一生：</strong>我是一个java对象，我出生在Eden区，在Eden区有一些跟我一样的兄弟们，我们在Eden区中一起玩，每天都有新的兄弟进来。有一天Eden区中的人实在是太多了，我就被迫去了Survivor区的“From”区，自从去了Survivor区，在这里生活非常不稳定。有时候在Survivor的“From”区，有时候在Survivor的“To”区，居无定所。直到我15岁的时候（默认15岁），就被分配到年老代那边，在这里人很多，并且年龄都挺大的。在年老代里，我生活了很久，每次GC年龄就+1，然后被回收。</p></blockquote><p>分代回收器有两个分区：<strong>老生代和新生代</strong>，新生代默认的空间占比总空间的 1&#x2F;3，老生代的默认占比是 2&#x2F;3。</p><p>新生代使用的是复制算法，新生代里有 3 个分区：Eden、To Survivor、From Survivor，它们的默认占比是 <strong>8:1:1</strong>，它的执行流程如下：</p><p>在GC开始的时候，对象只会存在于Eden区和名为“From”的Survivor区，Survivor区“To”是空的。紧接着进行GC，Eden区中所有存活的对象都会被复制到“To Survivor区”，仍存活的对象会根据他们的年龄值来决定去向。年龄达到一定值(年龄阈值，可以通过-XX:MaxTenuringThreshold来设置)的对象会被移动到年老代中。</p><p>清空 Eden 和 From Survivor 分区；</p><p>这时From Survivor 和 To Survivor 分区会互换角色，分区交换，From Survivor 变 To Survivor，To Survivor 变 From Survivor。</p><p>每次在 From Survivor 到 To Survivor 移动时都存活的对象，年龄就 +1，当年龄到达 15（默认配置是 15）时，升级为老生代。大对象也会直接进入老生代。</p><p>老生代当空间占用到达某个值之后就会触发全局垃圾收回，一般使用标记整理的执行算法。以上这些循环往复就构成了整个分代垃圾回收的整体执行流程。</p><p><img src="/post/dec4d43c/v2-40cbacd540b1555badbbf89132aace5f_720w.webp" alt="img"></p><p><strong>对象优先在 Eden 区分配：</strong></p><p>多数情况，对象都在新生代 Eden 区分配。当 Eden 区分配没有足够的空间进行分配时，虚拟机将会发起一次 Minor GC。如果本次 GC 后还是没有足够的空间，则将启用分配担保机制在老年代中分配内存。</p><ul><li><strong>Minor GC</strong> 是指发生在新生代的 GC，因为 Java 对象大多都是朝生夕死，所有 Minor GC 非常频繁，一般回收速度也非常快；</li><li><strong>Major GC&#x2F;Full GC</strong> 是指发生在老年代的 GC，出现了 Major GC 通常会伴随至少一次 Minor GC。Major GC 的速度通常会比 Minor GC 慢 10 倍以上。</li></ul><p><strong>大对象直接进入老年代：</strong></p><p>新生代使用的是标记-清除算法来处理垃圾回收的，如果大对象直接在新生代分配就会导致 Eden 区和两个 Survivor 区之间发生大量的内存复制。因此对于大对象都会直接在老年代进行分配。</p><p>所谓大对象是指，需要大量连续内存空间的Java对象，最典型的大对象就是那种很长的字符串以及数组。大对象对虚拟机的内存分配来说就是一个坏消息，经常出现大对象容易导致内存还有不少空间时就提前触发垃圾收集以获取足够的连续空间来 “安置” 它们。<br>虚拟机提供了一个<code>XX:PretenureSizeThreshold</code>参数，令大于这个设置值的对象直接在老年代分配，这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制（新生代采用的是复制算法）。</p><p><strong>长期存活对象将进入老年代：</strong></p><p>虚拟机采用分代收集的思想来管理内存，那么内存回收时就必须判断哪些对象应该放在新生代，哪些对象应该放在老年代。因此虚拟机给每个对象定义了一个对象年龄的计数器，如果对象在 Eden 区出生，并且能够被 Survivor 容纳，将被移动到 Survivor 空间中，这时设置对象年龄为 1。对象在 Survivor 区中每过一次 Minor GC 年龄就加 1，当年龄达到一定程度（默认 15） 就会被晋升到老年代。</p><blockquote><p> 转载于：<a href="https://zhuanlan.zhihu.com/p/159200599">JVM的垃圾回收机制——垃圾回收算法 - 知乎 (zhihu.com)</a></p><p>面试版：<a href="https://www.zhihu.com/question/21535724">JVM垃圾回收算法都有哪些？简述它们的执行过程及优缺点 - 知乎 (zhihu.com)</a></p></blockquote>]]></content>
+    
+    
+    <summary type="html">JVM垃圾回收机制、垃圾回收算法</summary>
+    
+    
+    
+    <category term="JavaSE" scheme="https://threewood1.top/categories/JavaSE/"/>
+    
+    
+    <category term="Java" scheme="https://threewood1.top/tags/Java/"/>
+    
+    <category term="JVM" scheme="https://threewood1.top/tags/JVM/"/>
+    
+    <category term="GC" scheme="https://threewood1.top/tags/GC/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java学习 | 堆和栈的区别</title>
     <link href="https://threewood1.top/post/c84b5546.html"/>
     <id>https://threewood1.top/post/c84b5546.html</id>
     <published>2024-03-12T11:00:45.000Z</published>
-    <updated>2024-03-12T11:12:32.151Z</updated>
+    <updated>2024-03-12T11:13:36.345Z</updated>
     
     <content type="html"><![CDATA[<h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><p>在Java中，内存分为两种，一种是栈内存，另一种就是堆内存。</p><h3 id="2、堆内存"><a href="#2、堆内存" class="headerlink" title="2、堆内存"></a>2、堆内存</h3><ol><li><p><strong>什么是堆内存</strong></p><p>堆内存是是Java内存中的一种，它的作用是用于存储Java中的对象和数组，当我们new一个对象或者创建一个数组的时候，就会在堆内存中开辟一段空间给它，用于存放。</p></li><li><p><strong>堆内存的特点</strong></p><p>第一点：堆其实可以类似的看做是管道，或者说是平时去排队买票的的情况差不多，所以堆内存的特点就是：先进先出，后进后出，也就是你先排队，好，你先买票。</p><p>第二点：堆可以动态地分配内存大小，生存期也不必事先告诉编译器，因为它是在运行时动态分配内存的，但缺点是，由于要在运行时动态分配内存，存取速度较慢。</p></li><li><p><strong>new对象在堆中如何分配</strong></p><p>由Java虚拟机的自动垃圾回收器来管理。</p></li></ol><h3 id="3、栈内存"><a href="#3、栈内存" class="headerlink" title="3、栈内存"></a>3、栈内存</h3><ol><li><p><strong>什么是栈内存</strong></p><p>栈内存是Java的另一种内存，主要是用来执行程序用的，比如：基本类型的变量和对象的引用变量。</p></li><li><p><strong>栈内存的特点</strong></p><p>第一点：栈内存就好像一个矿泉水瓶，像里面放入东西，那么先放入的沉入底部，所以它的特点是：先进后出，后进先出。</p><p>第二点：存取速度比堆要快，仅次于寄存器，栈数据可以共享，但缺点是，存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。</p></li><li><p><strong>栈内存分配机制</strong></p><p>栈内存可以称为一级缓存，由垃圾回收器自动回收。</p></li><li><p><strong>数据共享</strong></p><p>例子：<br>int a &#x3D; 3;<br>int b &#x3D; 3;</p><p>第一步处理：</p><ol><li>编译器先处理int a &#x3D; 3;</li><li>创建变量a的引用</li><li>在栈中查找是否有3这个值</li><li>没有找到，将3存放，a指向3</li></ol><p>第二步处理：</p><ol><li>处理b&#x3D;3</li><li>创建变量b的引用</li><li>找到，直接赋值</li></ol><p>第三步处理：</p><p>接下来<br>a &#x3D; 4；<br>同上方法<br>a的值改变，a指向4，b的值是不会发生改变的</p><blockquote><p>PS：如果是两个对象的话，那就不一样了，对象指向的是同一个引用，一个发生改变，另一个也会发生改变</p></blockquote></li></ol><h3 id="4、堆和栈的区别"><a href="#4、堆和栈的区别" class="headerlink" title="4、堆和栈的区别"></a>4、堆和栈的区别</h3><p>JVM是基于堆栈的虚拟机。JVM为每个新创建的线程都分配一个堆栈。也就是说，对于一个Java程序来说，它的运行就是通过对堆栈的操作来完成的。堆栈以帧为单位保存线程的状态。JVM对堆栈只进行两种操作：以帧为单位的压栈和出栈操作。</p><p><strong>差异：</strong></p><ol><li>堆内存用来存放由new创建的对象和数组；</li><li>栈内存用来存放方法或者局部变量等；</li><li>堆是先进先出，后进后出；</li><li>栈是后进先出，先进后出。</li></ol><p><strong>相同：</strong></p><ol><li>都是属于Java内存的一种；</li><li>系统都会自动去回收它，但是对于堆内存一般开发人员会自动回收它。</li></ol>]]></content>
     
@@ -480,29 +505,6 @@
     
     
     <category term="Git" scheme="https://threewood1.top/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Yaml/Yml配置文件学习</title>
-    <link href="https://threewood1.top/post/e6195049.html"/>
-    <id>https://threewood1.top/post/e6195049.html</id>
-    <published>2023-09-24T10:45:16.000Z</published>
-    <updated>2023-09-26T09:56:42.447Z</updated>
-    
-    <content type="html"><![CDATA[<p>在开发中我们常会用到配置文件，比较常见的配置文件有 <strong>xml</strong>、<strong>properties</strong> 和 <strong>yaml&#x2F;yml</strong>，其中实际开发中用的最多的就是 <strong>yaml&#x2F;yml</strong>，下面我将介绍这一配置文件的基本用法。</p><h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><p>XML：比较臃肿</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">port</span>&gt;</span>8080<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">address</span>&gt;</span>127.0.0.1<span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure><p>properties：层级结构不清晰</p><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server.port</span>=<span class="string">8080</span></span><br><span class="line"><span class="attr">server.address</span>=<span class="string">127.0.0.1</span></span><br></pre></td></tr></table></figure><p>yaml&#x2F;yml：简洁、数据为中心</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">   <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line">   <span class="attr">address:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure><h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><ul><li><p>大小写敏感</p></li><li><p>数值前边必须有<strong>空格</strong>，作为分隔符</p></li><li><p>使用缩进表示层级关系，缩进时，不允许使用Tab键，<strong>只能用空格</strong>（idea中会自动将Tab转换为空格）</p></li><li><p>缩进的空格数目不重要，只要相同层级的元素左侧对齐即可</p></li><li><p># 表示注释，从这个字符一直到行尾，都会被解析器忽略</p></li></ul><h1 id="yml数据格式"><a href="#yml数据格式" class="headerlink" title="yml数据格式"></a>yml数据格式</h1><ul><li><p>对象&#x2F;Map集合：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">user:</span></span><br><span class="line">   <span class="attr">name:</span> <span class="string">zhangsan</span></span><br><span class="line">   <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">   <span class="attr">password:</span> <span class="number">123456</span></span><br></pre></td></tr></table></figure></li><li><p>数组&#x2F;List&#x2F;Set集合：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hobby:</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">java</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">game</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">sport</span></span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    
-    <summary type="html">yaml配置文件说明以及使用方法</summary>
-    
-    
-    
-    <category term="Tools" scheme="https://threewood1.top/categories/Tools/"/>
-    
-    
-    <category term="Yaml" scheme="https://threewood1.top/tags/Yaml/"/>
-    
-    <category term="Yml" scheme="https://threewood1.top/tags/Yml/"/>
     
   </entry>
   
