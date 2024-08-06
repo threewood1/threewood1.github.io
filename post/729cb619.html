@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Redis常见面试问题 | Threewood</title><meta name="author" content="三木,959335709@qq.com"><meta name="copyright" content="三木"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Redis常见面试问题"><meta property="og:type" content="article"><meta property="og:title" content="Redis常见面试问题"><meta property="og:url" content="https://threewood1.top/post/729cb619.html"><meta property="og:site_name" content="Threewood"><meta property="og:description" content="Redis常见面试问题"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png"><meta property="article:published_time" content="2024-03-22T07:38:17.000Z"><meta property="article:modified_time" content="2024-03-27T07:34:30.077Z"><meta property="article:author" content="三木"><meta property="article:tag" content="Redis"><meta property="article:tag" content="Interviews"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png"><link rel="shortcut icon" href="/img/paw-solid.svg"><link rel="canonical" href="https://threewood1.top/post/729cb619.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media=&quot;all&quot;"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media=&quot;all&quot;"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media=&quot;all&quot;"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 三木","link":"链接: ","source":"来源: Threewood","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: false,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"Redis常见面试问题",isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!1,postUpdate:"2024-03-27 15:34:30"}</script><noscript><style type="text/css">#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"><link rel="stylesheet" href="/css/modify.css"><link rel="stylesheet" href="/css/font.css"><script src="/live2d-widget/autoload.js"></script></head><body><svg aria-hidden="true" style="position:absolute;overflow:hidden;width:0;height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Threewood" type="application/atom+xml"><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/myPic.png" onerror="onerror=null,src=&quot;/img/friend_404.gif&quot;" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">50</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-area-chart"></i><span> 相冊/壁紙</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> ToU:</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/HTML/Eluvletter/index.html"><i class="fa-fw fas fa-envelope"></i><span> Eluvletter</span></a></li><li><a class="site-page child" href="/HTML/LoveTime/index.html"><i class="fa-fw fas fa-heart"></i><span> LoveTime</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png)"><nav id="nav"><span id="blog-info"><a href="/" title="Threewood"><span class="site-name">Threewood</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-area-chart"></i><span> 相冊/壁紙</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> ToU:</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/HTML/Eluvletter/index.html"><i class="fa-fw fas fa-envelope"></i><span> Eluvletter</span></a></li><li><a class="site-page child" href="/HTML/LoveTime/index.html"><i class="fa-fw fas fa-heart"></i><span> LoveTime</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Redis常见面试问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-22T07:38:17.000Z" title="发表于 2024-03-22 15:38:17">2024-03-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-27T07:34:30.077Z" title="更新于 2024-03-27 15:34:30">2024-03-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Redis/">Redis</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" data-flag-title="Redis常见面试问题"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="top-img" style="background-image: url(https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png);"></div><article class="post-content" id="article-container"><ol><li><p><strong>什么是Redis，具有哪些特点？</strong></p><p>Redis是一个基于内存的数据库，读写速度非常快，通常被用作缓存、消息队列、分布式锁和键值存储数据库。它还支持多种数据结构，如字符串、哈希表、列表、集合、有序集合等，Redis还提供了分布式特性，可以将数据分布在多个节点上，以提高可扩展性和可用性。</p></li><li><p><strong>Redis的数据类型？有哪些使用场景？</strong></p><p><img src="/post/729cb619/image-20240324152122376.png"></p><p>Redis常见的数据类型有：String（字符串）、Hash（哈希表）、List（列表）、Set（集合）、Zset（有序集合）</p><ul><li>字符串：存储字符串数据，也可以存储整数、浮点数，是最基本的数据类型，常用于缓存对象、常规计数、分布式锁、共享Session信息等；</li><li>哈希表：存储字段和值的映射，常用于缓存对象、购物车等；</li><li>列表：存储有序的字符串元素，常用于消息队列（有两个问题：1. ⽣产者需要自行实现全局唯⼀ ID；2. 不能以消费组形式消费数据）；</li><li>集合：存储无序不重复的字符串元素，常用于聚合运算场景（并集、交集、差集），如点赞、共同关注、抽奖活动；</li><li>有序集合：类似于集合，但是可以根据元素所关联的分数进行排序，常用于排序场景，如排行榜。</li></ul><p>随着Redis版本更新，又更新了这些数据类型：</p><ul><li>BitMap：存储位的数据结构，可以处理一些位运算操作，比如签到、登录状态等；</li><li>HyperLogLog：用于基数估算的数据结构，用于统计元素的唯⼀数量，如海量数据基数统计的场景；</li><li>GEO：存储地理位置信息的数据结构；</li><li>Stream：专门为消息队列设计的数据类型。</li></ul></li><li><p><strong>Redis持久化机制有哪些？</strong></p><ul><li>AOF日志：每次执行一条写操作指令，就把该指令以追加的方式写入到一个文件里；</li><li>RDB快照：将某一时刻的内存数据，以二进制的方式写入磁盘；</li><li>混合持久化方式：集成了前两种的优点。（AOF优点是服务器宕机时<strong>丢失数据少</strong>，但是数据恢复不够快；RDB的优点是<strong>数据恢复快</strong>，但是保存快照的频率不好把握，频率高会影响新能，频率低会丢失的数据较多。）</li></ul></li><li><p><strong>混合持久化如何实现的？</strong></p><p><strong>混合持久化工作在 AOF 日志重写过程</strong>。在 AOF 重写日志时，fork出来的重写子进程会先将与主线程共享的内存数据以 RDB 方式写入到 AOF 文件，然后主线程处理的操作命令会被记录在重写缓冲区里，重写缓冲区里的增量命令会以AOF 方式写入到 AOF 文件，写入完成后通知主进程将新的含有 RDB 格式和 AOF 格式的 AOF 文件替换旧的的AOF 文件。文件的前半部分是 RDB 格式的全量数据，后半部分是 AOF 格式的增量数据。</p><p>总结：首先将内存的数据以RDB的方式写入到AOF文件，而后续主线程的写操作命令会被记录到重写缓冲区，重写缓冲区里的增量命令会以AOF 方式写入到 AOF 文件，最后前半部分是RDB格式的全量数据、后半部分是AOF格式的增量数据的AOF文件再持久化到磁盘上。</p></li><li><p><strong>AOF的三种写回策略？</strong></p><p>Always、Everysec和No，这三种策略的可靠性是从高到低，而性能是从低到高。</p><p><strong>Always</strong>是每次写操作命令执行完后，同步将AOF日志数据写回磁盘；<strong>Always</strong>每次写操作命令执行完后，先将命令写入到AOF文件的内核缓冲区，然后每隔一秒将缓冲区的内容写回磁盘；<strong>No</strong>就是不控制写回磁盘的时机。每次写操作命令执行完后，先将写操作命令写入到AOF文件的内核缓冲区，再由操作系统决定何时将缓冲区的内容写回磁盘。</p></li><li><p><strong>Redis集群模式有哪些/Redis有哪些部署方案？哨兵模式的功能？</strong></p><ul><li><strong>主从复制</strong>：将一个Redis实例的数据复制到其他实例，其中一个是主节点（master），其余是从节点（slave）。主节点将写操作传播到所有从节点。</li><li><strong>哨兵（Sentinel）</strong>：监控Redis实例的状态，发现主节点故障时，自动进行故障转移。</li><li><strong>切片集群（Cluster）</strong>：将数据分布在不同的服务器上，以此来降低系统对单主节点的依赖。</li></ul><p>Redis哨兵用于监控Redis实例的状态，发现主节点的故障并自动进行故障转移。</p><ul><li>监控：监控Redis主服务器和从服务器的状态，包括连接状态、是否能够执行命令、是否有持久性问题等。</li><li>故障转移：当哨兵（sentinel）发现主服务器不可用时（例如宕机），它会通过一定的选举机制选择一个从服务器升级为新的主服务器。</li><li>通知：哨兵（sentinel）在选举完新的主服务器后，通知其他从服务器将其切换到新的主服务器。</li></ul></li><li><p><strong>哨兵的工作原理？</strong></p><ul><li><p><strong>判断节点是否存活</strong>：每个哨兵定期向Redis服务器发送PING命令，以检测服务器是否处于活跃状态。若哨兵在连续一定次数未收到服务器的响应，就认为该服务器主观下线。然后哨兵就会从从节点中选择一个作为主节点。</p></li><li><p><strong>选出新主节点</strong>：在发现主服务器下线后，哨兵们会协调选举一个新的主服务器。这个过程中，哨兵会考虑每个可用的从服务器，选择个作为新的主服务器，并将其他从服务器配置为复制新的主服务器。</p><p>具体过程：</p><ul><li><strong>选择候选从服务器</strong>：哨兵会从可用的从服务器中选择一组候选服务器，通常选择复制偏移量 (replicationoffset) 最大的从服务器。</li><li><strong>计算投票</strong>：每个哨兵为每个候选从服务器投票。投票的考量因素包括从服务器的复制偏移量、连接质量、优先级等。</li><li><strong>达成共识</strong>：哨兵们根据投票结果达成共识，选择一个从服务器作为新的主服务器。这通常需要获得多数哨兵的同意。</li></ul></li><li><p><strong>更新配置信息</strong>：一旦新的主服务器被选出，哨兵会更新 Redis 集群的配置信息，包括将新的主服务器的地址和端口通知给其他哨兵和客户端。</p></li><li><p><strong>通知客户端</strong>：哨兵会向客户端发送通知，告知客户端新的主服务器的位置，以便客户端能够重新连接。</p></li></ul></li><li><p><strong>Redis过期删除策略有哪些？</strong></p><ul><li><strong>定时删除</strong>：设置key的过期时间，当时间到达时，自动执行key的删除操作。</li><li><strong>惰性删除</strong>：每次从数据库访问 key 时，都检测 key 是否过期，如果过期则删除该 key。</li><li><strong>定期删除</strong>：每隔一段时间随机] 从数据库中取出一定数量的 key 进行检查，并删除其中的过期key。</li></ul><p>Redis选择 <strong>惰性删除 + 定期删除</strong> 这两种策略配合使用。</p></li><li><p><strong>缓存雪崩、击穿、穿透和解决办法</strong></p><p><img src="/post/729cb619/image-20240326095110638.png" alt="image-20240326095110638"></p></li><li><p><strong>如何保证数据库和缓存的一致性？</strong></p><p><strong>Cache Aside</strong></p><ul><li><p><strong>原理:</strong> 先从缓存中读取数据，如果没有就再去数据库里面读数据，然后把数据放回缓存中，如果缓存中可以找到数据就直接返回数据，更新数据的时候先把数据持久化到数据库，然后再让缓存失效。</p></li><li><p><strong>问题:</strong> 假如有两个操作一个更新一个查询，第一个操作先更新数据库，还没来及删除数据库，查询操作可能拿到的就是旧的数据，更新操作马上让缓存失效了，所以后续的查询可以保证数据的一致性;还有的问题就是有一个是读操作没有命中缓存，然后就到数据库中取数据，此时来了一个写操作，写完数据库后，让缓存失效,然后，之前的那个读操作再把老的数据放进去，也会造成脏数据。</p></li><li><p><strong>可行性:</strong> 出现上述问题的概率其实非常低，需要同时达成读缓存时缓存失效并且有并发写的操作。数据库读写要比缓存慢得多，所以读操作在写操作之前进入数据库，并目在写操作之后更新，概率比较低。</p></li></ul><p><strong>Read/Write Through</strong></p><ul><li><p><strong>原理:</strong> Read/Write Through原理是把更新数据库(Repository) 的操作由缓存代理，应用认为后端是一个单一的存储，而存储自己维护自己的缓存。</p></li><li><p><strong>Read Through:</strong> 就是在查询操作中更新缓存，也就是说，当缓存失效的时候，Cache Aside策略是由调用方负责把数据加载入缓存，而Read Through则用缓存服务自己来加载，从而对调用方是透明的。</p></li><li><p>Write Through: 当有数据更新的时候，如果没有命中缓存，直接更新数据库，然后返回。如果命中了缓存，则更新缓存，然后再由缓存自己更新数据库 (这是一个同步操作)</p></li></ul><p><strong>Write Behind</strong></p><ul><li><p><strong>原理:</strong> 在更新数据的时候，只更新缓存，不更新数据库，而缓存会异步地批量更新数据库。这个设计的好处就是让数据的I/O操作非常快，带来的问题是，数据不是强一致性的，而且可能会丢。</p></li><li><p><strong>第二步失效问题:</strong> 这种可能性极小，缓存删除只是标记一下无效的软删除，可以看作不耗时间。如果会出问题，一般程序在写数据库那里就没有完成: 故意在写完数据库后，休眠很长时间再来删除缓存。</p></li></ul></li></ol></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Redis/">Redis</a><a class="post-meta__tags" href="/tags/Interviews/">Interviews</a></div><div class="post_share"><div class="social-share" data-image="https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media=&quot;all&quot;"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/post/dec4d43c.html" title="Java学习 | JVM的垃圾回收机制——垃圾回收算法"><img class="cover" src="https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png" onerror="onerror=null,src=&quot;/img/404.jpg&quot;" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java学习 | JVM的垃圾回收机制——垃圾回收算法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/8434e219.html" title="Redis学习"><img class="cover" src="https://w.wallhaven.cc/full/rr/wallhaven-rre597.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-20</div><div class="title">Redis学习</div></div></a></div></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/myPic.png" onerror="this.onerror=null,this.src=&quot;/img/friend_404.gif&quot;" alt="avatar"></div><div class="author-info__name">三木</div><div class="author-info__description"><center>目前计算机研究生在读，一次偶然的机会建立了这个博客，希望能在这里记录自己的学习和生活。<br>生命不息，学习不止，大胆地向前冲吧！ (ง •̀_•́)ง<center></center></center></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">50</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/threewood1"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://space.bilibili.com/336738455" target="_blank" title="Bilibili"><i class="iconfont icon-bilibilia" style="color:#000"></i></a><a class="social-icon" href="/img/qq.png" target="_blank" title="QQ"><i class="iconfont icon-qq" style="color:#000"></i></a><a class="social-icon" href="/img/wechat.png" target="_blank" title="WeChat"><i class="iconfont icon-weixin" style="color:#000"></i></a><a class="social-icon" href="mailto:959335709@qq.com" target="_blank" title="有什么建议就给我发邮件吧"><i class="iconfont icon-envelope" style="color:#000"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><center>Welcome to my Blog.<br>由于博主囊中羞涩，租不起国内的服务器，因此访问速度可能有点慢，有条件的朋友可以使用科学上网。<br>备用地址：threewood.top<center></center></center></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/729cb619.html" title="Redis常见面试问题"><img src="https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" alt="Redis常见面试问题"></a><div class="content"><a class="title" href="/post/729cb619.html" title="Redis常见面试问题">Redis常见面试问题</a><time datetime="2024-03-22T07:38:17.000Z" title="发表于 2024-03-22 15:38:17">2024-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/dec4d43c.html" title="Java学习 | JVM的垃圾回收机制——垃圾回收算法"><img src="https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" alt="Java学习 | JVM的垃圾回收机制——垃圾回收算法"></a><div class="content"><a class="title" href="/post/dec4d43c.html" title="Java学习 | JVM的垃圾回收机制——垃圾回收算法">Java学习 | JVM的垃圾回收机制——垃圾回收算法</a><time datetime="2024-03-14T12:16:24.000Z" title="发表于 2024-03-14 20:16:24">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/c84b5546.html" title="Java学习 | 堆和栈的区别"><img src="https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" alt="Java学习 | 堆和栈的区别"></a><div class="content"><a class="title" href="/post/c84b5546.html" title="Java学习 | 堆和栈的区别">Java学习 | 堆和栈的区别</a><time datetime="2024-03-12T11:00:45.000Z" title="发表于 2024-03-12 19:00:45">2024-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/264f303d.html" title="Java学习 | 集合框架"><img src="https://w.wallhaven.cc/full/2y/wallhaven-2y39jy.png" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" alt="Java学习 | 集合框架"></a><div class="content"><a class="title" href="/post/264f303d.html" title="Java学习 | 集合框架">Java学习 | 集合框架</a><time datetime="2024-03-11T08:35:12.000Z" title="发表于 2024-03-11 16:35:12">2024-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/f1d7e9fc.html" title="「LeetCode」二叉树的层序遍历"><img src="https://w.wallhaven.cc/full/kw/wallhaven-kwov61.png" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" alt="「LeetCode」二叉树的层序遍历"></a><div class="content"><a class="title" href="/post/f1d7e9fc.html" title="「LeetCode」二叉树的层序遍历">「LeetCode」二叉树的层序遍历</a><time datetime="2024-03-08T12:04:27.000Z" title="发表于 2024-03-08 20:04:27">2024-03-08</time></div></div></div></div></div></div></main><footer id="footer" style="background:0 0"><div id="footer-wrap"><div class="copyright">©2020 - 2024 By 三木</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://threewood1.github.io">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addModeChange('mermaid', runMermaid)
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.threewood1.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.threewood1.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="/js/sun_moon.js" async=""></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="docsearch-wrap"><div id="docsearch" style="display:none"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css/dist/style.min.css"><script src="https://cdn.jsdelivr.net/npm/@docsearch/js/dist/umd/index.min.js"></script><script>(() => {
+  docsearch(Object.assign({
+    appId: 'NSRJN7YXG6',
+    apiKey: '6a47300c2d5f7cd71bfe8c828ca4ec2f',
+    indexName: 'threewood1',
+    container: '#docsearch',
+  }, null))
+
+
+  const searchClickFn = () => {
+    document.querySelector('#search-button > .search').addEventListener('click', () => {
+      document.querySelector('.DocSearch-Button').click()
+    })
+  }
+
+  searchClickFn()
+  window.addEventListener('pjax:complete', searchClickFn)
+})()</script></div></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
